@@ -1,0 +1,4 @@
+dontinline com/tisov/denis/trader/walker/MdWalker orderReplace
+dontinline com/tisov/denis/trader/walker/MdWalker orderExecuted
+dontinline com/tisov/denis/trader/walker/MdWalker orderExecutedWithPrice
+dontinline com/tisov/denis/trader/walker/MdWalker addOrderWithMpid

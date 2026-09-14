@@ -1,1 +1,6 @@
 rootProject.name = 'hft-learning-java-public'
+include 'wire'
+include 'feed-replay'
+include 'trader'
+include 'learning'
+include 'e2e'

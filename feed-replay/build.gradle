@@ -1,0 +1,13 @@
+plugins {
+    id 'hft.java-conventions'
+    id 'application'
+}
+
+dependencies {
+    implementation project(':wire')
+    implementation libs.agrona
+}
+
+application {
+    mainClass = 'com.tisov.denis.feedreplay.Main'
+}

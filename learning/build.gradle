@@ -1,0 +1,9 @@
+plugins {
+    id 'hft.java-conventions'
+    id 'hft.jmh-conventions'
+}
+
+dependencies {
+    implementation libs.jol.core
+    jmh libs.jol.core
+}

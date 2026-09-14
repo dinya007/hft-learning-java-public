@@ -1,0 +1,18 @@
+plugins {
+    id 'hft.java-conventions'
+    id 'hft.jmh-conventions'
+    id 'application'
+}
+
+dependencies {
+    implementation project(':wire')
+    implementation libs.agrona
+    implementation libs.jctools.core
+    implementation libs.hdrhistogram
+    implementation libs.agrona
+    implementation libs.fastutil
+}
+
+application {
+    mainClass = 'com.tisov.denis.trader.Main'
+}

@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.tisov.denis'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+def libs = extensions.getByType(VersionCatalogsExtension).named('libs')
+
+dependencies {
+    testImplementation platform(libs.findLibrary('junit-bom').get())
+    testImplementation libs.findLibrary('junit-jupiter').get()
+    testImplementation libs.findLibrary('assertj-core').get()
+    testRuntimeOnly libs.findLibrary('junit-launcher').get()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs.addAll([
+            '--add-exports', 'java.base/jdk.internal.vm.annotation=ALL-UNNAMED'
+    ])
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    outputs.upToDateWhen { false }
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat 'full'
+    }
+    jvmArgs '--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED'
+    jvmArgs '--add-opens=java.base/jdk.internal.vm.annotation=ALL-UNNAMED'
+}

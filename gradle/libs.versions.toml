@@ -1,0 +1,30 @@
+[versions]
+junit = "6.0.0"
+jmh = "1.37"
+jol = "0.17"
+agrona = "2.4.1"
+jctools = "4.0.5"
+hdrhistogram = "2.2.2"
+fastutil = "8.5.18"
+disruptor = "4.0.0"
+assertj = "3.26.3"
+jmh-plugin = "0.7.3"
+
+[libraries]
+junit-bom         = { group = "org.junit", name = "junit-bom", version.ref = "junit" }
+junit-jupiter     = { group = "org.junit.jupiter", name = "junit-jupiter" }
+junit-launcher    = { group = "org.junit.platform", name = "junit-platform-launcher" }
+assertj-core      = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
+
+jol-core          = { group = "org.openjdk.jol", name = "jol-core", version.ref = "jol" }
+jmh-core          = { group = "org.openjdk.jmh", name = "jmh-core", version.ref = "jmh" }
+jmh-annprocess    = { group = "org.openjdk.jmh", name = "jmh-generator-annprocess", version.ref = "jmh" }
+
+agrona            = { group = "org.agrona", name = "agrona", version.ref = "agrona" }
+jctools-core      = { group = "org.jctools", name = "jctools-core", version.ref = "jctools" }
+hdrhistogram      = { group = "org.hdrhistogram", name = "HdrHistogram", version.ref = "hdrhistogram" }
+fastutil          = { group = "it.unimi.dsi", name = "fastutil", version.ref = "fastutil" }
+disruptor         = { group = "com.lmax", name = "disruptor", version.ref = "disruptor" }
+
+[plugins]
+jmh = { id = "me.champeau.jmh", version.ref = "jmh-plugin" }

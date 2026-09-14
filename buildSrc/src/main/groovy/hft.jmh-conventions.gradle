@@ -1,0 +1,28 @@
+import org.gradle.internal.os.OperatingSystem
+
+plugins {
+    id 'me.champeau.jmh'
+}
+
+def asyncProfilerLib = OperatingSystem.current().isMacOsX()
+        ? '/opt/homebrew/lib/libasyncProfiler.dylib'
+        : '/opt/async-profiler/lib/libasyncProfiler.so'
+
+jmh {
+    resultFormat = 'TEXT'
+    profilers = [
+            'gc',
+            "async:libPath=${asyncProfilerLib};event=alloc;output=flamegraph;dir=build/reports/jmh",
+    ]
+    jvmArgsAppend = [
+            '--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED',
+            '--add-opens=java.base/jdk.internal.vm.annotation=ALL-UNNAMED',
+            '-XX:-RestrictContended',
+            '-XX:CompileCommandFile=../hints/mdwalker.hints',
+            '-XX:+UnlockDiagnosticVMOptions',
+    ]
+}
+
+tasks.named('jmh') {
+    outputs.upToDateWhen { false }
+}

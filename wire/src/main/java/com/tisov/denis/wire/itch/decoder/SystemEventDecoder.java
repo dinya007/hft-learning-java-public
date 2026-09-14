@@ -1,0 +1,50 @@
+package com.tisov.denis.wire.itch.decoder;
+
+import com.tisov.denis.wire.itch.Itch;
+
+import java.lang.foreign.MemorySegment;
+
+public final class SystemEventDecoder {
+
+    public static final char EVENT_START_OF_MESSAGES = 'O';
+    public static final char EVENT_START_OF_SYSTEM_HOURS = 'S';
+    public static final char EVENT_START_OF_MARKET_HOURS = 'Q';
+    public static final char EVENT_END_OF_MARKET_HOURS = 'M';
+    public static final char EVENT_END_OF_SYSTEM_HOURS = 'E';
+    public static final char EVENT_END_OF_MESSAGES = 'C';
+
+    private static final int OFF_MESSAGE_TYPE = 0;
+    private static final int OFF_STOCK_LOCATE = 1;
+    private static final int OFF_TRACKING = 3;
+    private static final int OFF_TIMESTAMP = 5;
+    private static final int OFF_EVENT_CODE = 11;
+
+    private MemorySegment memorySegment;
+    private long base;
+
+    public SystemEventDecoder wrap(MemorySegment memorySegment, long base) {
+        this.memorySegment = memorySegment;
+        this.base = base;
+        return this;
+    }
+
+    public char messageType() {
+        return Itch.readChar(memorySegment, base + OFF_MESSAGE_TYPE);
+    }
+
+    public int stockLocate() {
+        return Itch.readU16BE(memorySegment, base + OFF_STOCK_LOCATE);
+    }
+
+    public int tracking() {
+        return Itch.readU16BE(memorySegment, base + OFF_TRACKING);
+    }
+
+    public long timestamp() {
+        return Itch.readU48BE(memorySegment, base + OFF_TIMESTAMP);
+    }
+
+    public char eventCode() {
+        return Itch.readChar(memorySegment, base + OFF_EVENT_CODE);
+    }
+}

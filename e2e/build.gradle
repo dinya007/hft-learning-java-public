@@ -1,0 +1,23 @@
+plugins {
+    id 'hft.java-conventions'
+    id 'hft.jmh-conventions'
+}
+
+dependencies {
+    implementation project(':wire')
+    implementation project(':feed-replay')
+    implementation project(':trader')
+
+    testImplementation libs.fastutil
+    testImplementation libs.hdrhistogram
+}
+
+test {
+    useJUnitPlatform { excludeTags 'perf', 'probe' }
+}
+
+tasks.named('test') {
+    if (project.hasProperty('jfr')) {
+        jvmArgs '-XX:StartFlightRecording=settings=profile,filename=build/alloc.jfr,dumponexit=true'
+    }
+}
