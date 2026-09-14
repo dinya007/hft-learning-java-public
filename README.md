@@ -38,8 +38,7 @@ Requires JDK 25 (Gradle toolchain). Build: `./gradlew build`.
 
 `data/01302020.NASDAQ_ITCH50.5mb.itch` (5 MB prefix of the 2020-01-30 NASDAQ feed) and
 `data/AMD/01302020.peak_{5s,1m,5m}.itch` (AMD-only windows) are committed so the suite runs out
-of the box; `scripts/itch/` downloads and trims a fresh sample. Tests needing larger captures
-or long wall-clock runs carry a `@Disabled` reason:
+of the box. Tests needing larger captures or long wall-clock runs carry a `@Disabled` reason:
 
 | Test                                                         | Needs                                                                            |
 |--------------------------------------------------------------|----------------------------------------------------------------------------------|
